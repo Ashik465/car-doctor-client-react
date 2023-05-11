@@ -1,12 +1,36 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logimg from '../../assets/images/login/login.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
 
 
 const Login = () => {
 
-
+    const { signInWithEmail } = useContext(AuthContext);
+    const navigate =useNavigate();
+ 
 const handleSignIn = (e) => {
     e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log( email, password);
+
+    signInWithEmail(email, password)
+        .then((result) => {
+            // Signed in
+            const user = result.user;
+            console.log(user);
+          navigate('/')
+            // ...
+        }
+        )
+        .catch((error) => {
+            console.log(error);
+            // ..
+        }
+        );
 }
 
   return (
