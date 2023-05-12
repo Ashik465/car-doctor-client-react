@@ -7,7 +7,7 @@ const NavBar = () => {
 
 const {user, logout} = useContext(AuthContext);
 
-console.log(user?.email);
+
 
 const handleLogout = () => {
 
@@ -24,10 +24,15 @@ const handleLogout = () => {
    
 }
 
+const scrollToSection = () => {
+  const targetSection = document.getElementById('about');
+  targetSection.scrollIntoView({ behavior: 'smooth' });
+};
+
 const navItems = <>
 
  <li><Link  to="/">Home</Link></li>
- <li><Link>About</Link></li>
+ <li><Link onClick={scrollToSection}>About</Link></li>
  
  {user?.email ? <li><button onClick={handleLogout}>Logout</button></li> : <li><Link to ="/login">Login</Link></li>  }
 </>
