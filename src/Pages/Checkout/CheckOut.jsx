@@ -17,7 +17,7 @@ const CheckOut = () => {
         const name = from.name.value;
         const date = from.date.value;
         const price = from.price.value;
-        const email = from.email.value;
+        const email = user?.email;
          const message = from.message.value;
 
         const order = { customerName: name,
