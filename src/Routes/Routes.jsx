@@ -8,6 +8,8 @@ import LogInLayout from "../layout/LogInLayout";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/sign-up/SignUp";
 import CheckOut from "../Pages/Checkout/CheckOut";
+import Order from "../Pages/Order/Order";
+import PrivateRoute from "./PrivateRoute";
 
   const router = createBrowserRouter([
     {
@@ -18,6 +20,10 @@ import CheckOut from "../Pages/Checkout/CheckOut";
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/order",
+          element: <PrivateRoute><Order></Order></PrivateRoute> ,
         },
         {
           path: "/checkout/:id",
