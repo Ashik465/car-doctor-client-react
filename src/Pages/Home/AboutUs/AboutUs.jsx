@@ -4,7 +4,7 @@ import pic2 from "../../../assets/images/about_us/parts.jpg";
 const AboutUs = () => {
   return (
     <>
-      <div className="hero min-h-screen mt-10">
+      <div id="about" className="hero min-h-screen mt-10">
         <div className="hero-content  flex-col lg:flex-row">
           <div className=" lg:w-1/2 relative">
             <img src={pic1} className="w-3/4 rounded-lg shadow-2xl" />
