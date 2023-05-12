@@ -13,7 +13,7 @@ const Service = () => {
    const [showAll, setShowAll] = useState(false)
     
     useEffect(() => {    
-     fetch('./public/services.json')
+     fetch('http://localhost:5000/services')
      .then(res => res.json())
      .then(data => setServiceData(data))
      }, [])
