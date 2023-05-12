@@ -1,5 +1,5 @@
-const OrderTableRow = ({ order ,handleOrderDelete }) => {
-  const { serviceTitle, img, price, date,_id } = order;
+const OrderTableRow = ({ order ,handleOrderDelete,handleConfirmOrder }) => {
+  const { serviceTitle, img, price, date,_id,status } = order;
   
    
   
@@ -40,7 +40,7 @@ const OrderTableRow = ({ order ,handleOrderDelete }) => {
       <td>$ {price}</td>
       <td>{date}</td>
       <th>
-        <button className="btn btn-ghost btn-xs">details</button>
+        {status === "Confirmed" ? <span className="text-purple-400">Order Confirmed</span> :<button onClick={()=>handleConfirmOrder(_id)} className="btn btn-ghost btn-xs"> Please Confirm</button>}
       </th>
     </tr>
   );

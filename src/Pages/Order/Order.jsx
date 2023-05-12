@@ -16,7 +16,7 @@ const Order = () => {
         setOrder(data);
         console.log(data);
       });
-  }, []);
+  }, [url]);
 
   const handleOrderDelete = (id) => {
     Swal.fire({
@@ -45,6 +45,40 @@ const Order = () => {
       }
     });
   };
+
+    
+   const handleConfirmOrder = (id) => {
+ console.log(id);
+    fetch(`http://localhost:5000/updateOrder/${id}`, {
+      method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "Confirmed" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Order Confirmed Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          const remainingOrder = order.filter((order) => order._id !== id);
+          const updatedOrder = order.find((order) => order._id === id);
+            updatedOrder.status = "Confirmed";
+            setOrder([updatedOrder, ...remainingOrder]);
+        }
+      });
+
+
+   }
+
+
+
+
+
 
   return (
     <div className="my-10">
@@ -77,6 +111,7 @@ const Order = () => {
                 handleOrderDelete={handleOrderDelete}
                 order={order}
                 key={order._id}
+                handleConfirmOrder={handleConfirmOrder}
               ></OrderTableRow>
             ))}
           </tbody>
