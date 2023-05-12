@@ -41,18 +41,17 @@ const signUpWithEmail = (email, password) => {
  
  // observe user state change
  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user);
-        setUser(user);
-        setLoading(false);
-      } 
-    });
-    return () => {
-        return unsubscribe();
-    }
-  }, []);
+   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+     setUser(currentUser);
+     setLoading(false);
+   });
 
+   // stop observing while unmounting
+
+   return () => {
+     return unsubscribe();
+   };
+ }, []);
  
  
  
