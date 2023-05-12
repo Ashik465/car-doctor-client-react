@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const CheckOut = () => {
 
      const {user} = useContext(AuthContext)
     const service = useLoaderData()
-    const {title,price,_id} = service
+    const {title,price,_id,img} = service
 
     const handleSubmitOrder = (e) => {
         e.preventDefault()
@@ -21,6 +22,7 @@ const CheckOut = () => {
 
         const order = { customerName: name,
             date,
+            img,
             price,
             email,
             message,
@@ -37,7 +39,14 @@ const CheckOut = () => {
             .then(res => res.json())
             .then(data => {
                 if(data.insertedId){
-                    alert('Your Order Placed Successfully')
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Your Order Placed Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                   
                 }
             }
             )

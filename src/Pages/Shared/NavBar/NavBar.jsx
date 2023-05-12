@@ -7,7 +7,7 @@ const NavBar = () => {
 
 const {user, logout} = useContext(AuthContext);
 
-
+console.log(user?.email);
 
 const handleLogout = () => {
 
@@ -28,8 +28,8 @@ const navItems = <>
 
  <li><Link  to="/">Home</Link></li>
  <li><Link>About</Link></li>
- <li><Link to ="/login">Login</Link></li> 
- {user ? <li><Link to ="/login" onClick={handleLogout}>Logout</Link></li> : '' }
+ 
+ {user?.email ? <li><button onClick={handleLogout}>Logout</button></li> : <li><Link to ="/login">Login</Link></li>  }
 </>
 
 
