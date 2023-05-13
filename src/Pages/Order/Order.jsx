@@ -2,21 +2,47 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import OrderTableRow from "./OrderTableRow";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
-  const { user } = useContext(AuthContext);
+  const { user,logout } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
+  const navigate = useNavigate();
 
   const url = `http://localhost:5000/orders?email=${user?.email}`;
 
   useEffect(() => {
-    fetch(url)
+    fetch(url , { method: "GET"  ,
+     headers: { 
+
+       authorization: `Bearer ${localStorage.getItem("car-access-token")}`,
+
+      } })
       .then((res) => res.json())
       .then((data) => {
-        setOrder(data);
-        console.log(data);
+        if(!data.error){
+           setOrder(data);
+        }
+        else{
+           //log out 
+           logout()
+           .then(() => {
+             // Sign-out successful.
+     
+            // localStorage.removeItem("car-access-token");
+          navigate('/login')
+
+     
+           })
+           .catch((error) => {
+             // An error happened.
+             console.log(error);
+           });      
+        }
+       
+       
       });
-  }, [url]);
+  }, [url,navigate]);
 
   const handleOrderDelete = (id) => {
     Swal.fire({
