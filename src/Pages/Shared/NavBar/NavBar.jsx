@@ -10,6 +10,9 @@ const NavBar = () => {
     logout()
       .then(() => {
         // Sign-out successful.
+
+       localStorage.removeItem("Access-token");
+
       })
       .catch((error) => {
         // An error happened.

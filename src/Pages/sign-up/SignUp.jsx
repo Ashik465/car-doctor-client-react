@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logimg from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const SignUp = () => {
   const { signUpWithEmail } = useContext(AuthContext);
+  
+  const navigate = useNavigate();
+  
+  const location =useLocation()
+  const from = location.state?.pathname || '/'
+
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -20,6 +26,7 @@ const SignUp = () => {
         // Signed in
         const user = result.user;
         console.log(user);
+        navigate(from,{replace:true})
         // ...
       })
       .catch((error) => {
@@ -65,7 +72,7 @@ const SignUp = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="password"
                   name="password"
                   className="input input-bordered"

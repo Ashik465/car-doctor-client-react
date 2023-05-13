@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logimg from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
@@ -8,6 +8,9 @@ const Login = () => {
 
     const { signInWithEmail } = useContext(AuthContext);
     const navigate =useNavigate();
+    const location = useLocation()
+
+    const from = location.state?.pathname || '/'
  
 const handleSignIn = (e) => {
     e.preventDefault();
@@ -22,8 +25,31 @@ const handleSignIn = (e) => {
             // Signed in
             const user = result.user;
             console.log(user);
-          navigate('/')
+             const loggedInUser = {  email: user.email }
             // ...
+       
+            //jwt token
+
+            fetch('http://localhost:5000/jwt', {
+
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+
+                },
+                body: JSON.stringify(loggedInUser)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    localStorage.setItem('Access-token', data.token)
+                    navigate(from,{replace:true})
+                }
+                )
+
+
+
+
         }
         )
         .catch((error) => {
@@ -59,7 +85,7 @@ const handleSignIn = (e) => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 name='password'
                 className="input input-bordered"
@@ -75,7 +101,7 @@ const handleSignIn = (e) => {
               <input className="btn bg-orange-500 border-none" type="submit" value="Log-In" />
             </div>
 
-             <p className='my-4'>new to car doctor <Link className=' text-orange-500' to='/signup'> Sign-up</Link>   </p>
+             <p className='my-4'>new to car doctor <Link className=' text-orange-500'state={location.state} to='/signup'> Sign-up</Link>   </p>
            </form>
             
           </div>
