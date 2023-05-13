@@ -31,7 +31,7 @@ const CheckOut = () => {
 
         console.log(order);
         
-       fetch('http://localhost:5000/addorder',{
+       fetch('https://car-doctor-server-eight-eta.vercel.app/addorder',{
            method:'POST',
            headers:{'Content-Type':'application/json'},
            body:JSON.stringify(order)
