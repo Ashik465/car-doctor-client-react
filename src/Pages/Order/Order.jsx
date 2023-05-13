@@ -9,7 +9,7 @@ const Order = () => {
   const [order, setOrder] = useState([]);
   const navigate = useNavigate();
 
-  const url = `http://localhost:5000/orders?email=${user?.email}`;
+  const url = `https://car-doctor-server-eight-eta.vercel.app/orders?email=${user?.email}`;
 
   useEffect(() => {
     fetch(url , { method: "GET"  ,
@@ -55,7 +55,7 @@ const Order = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteOrder/${id}`, {
+        fetch(`https://car-doctor-server-eight-eta.vercel.app/deleteOrder/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -75,7 +75,7 @@ const Order = () => {
     
    const handleConfirmOrder = (id) => {
  console.log(id);
-    fetch(`http://localhost:5000/updateOrder/${id}`, {
+    fetch(`https://car-doctor-server-eight-eta.vercel.app/updateOrder/${id}`, {
       method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "Confirmed" }),

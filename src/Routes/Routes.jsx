@@ -28,7 +28,7 @@ import PrivateRoute from "./PrivateRoute";
         {
           path: "/checkout/:id",
           element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute> ,
-          loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`),
+          loader: ({params}) => fetch(`https://car-doctor-server-eight-eta.vercel.app/services/${params.id}`),
         },
       ],
     },
