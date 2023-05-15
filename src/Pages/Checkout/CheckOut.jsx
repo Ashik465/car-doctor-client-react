@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import Banner from "../../components/banner/Banner";
 
 
 const CheckOut = () => {
@@ -59,6 +60,10 @@ const CheckOut = () => {
 
     return (
         <div>
+
+              <Banner></Banner>
+
+
             <h1 className=" text-center text-orange-500 font-bold text-3xl"> Checkout {title}</h1>
            {/* from start  */}
 
