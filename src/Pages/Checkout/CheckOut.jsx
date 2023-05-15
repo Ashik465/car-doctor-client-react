@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
-import Banner from "../../components/banner/Banner";
+
+import GlobalBanner from "../../components/banner/GlobalBanner";
 
 
 const CheckOut = () => {
@@ -61,7 +62,10 @@ const CheckOut = () => {
     return (
         <div>
 
-              <Banner></Banner>
+              <GlobalBanner>
+
+                 <div className='text-5xl font-bold text-white absolute left-20 bottom-40  '>checkOut</div>
+              </GlobalBanner>
 
 
             <h1 className=" text-center text-orange-500 font-bold text-3xl"> Checkout {title}</h1>
