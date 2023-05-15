@@ -4,6 +4,8 @@ import OrderTableRow from "./OrderTableRow";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
+import GlobalBanner from "../../components/banner/GlobalBanner";
+
 const Order = () => {
   const { user,logout } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
@@ -108,6 +110,12 @@ const Order = () => {
 
   return (
     <div className="my-10">
+
+             <GlobalBanner>
+             <div className='text-5xl font-bold text-white absolute left-20 bottom-40  '>Order</div>
+
+             </GlobalBanner>
+
       <h1 className="text-center text-3xl my-3 font-bold"> Order details</h1>
 
       {/* order table start */}
