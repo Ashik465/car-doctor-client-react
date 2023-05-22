@@ -11,12 +11,13 @@ const Service = () => {
     const [serviceData, setServiceData] = useState([])
   
    const [showAll, setShowAll] = useState(false)
+   const [ascending, setAcending] = useState(true)
     
     useEffect(() => {    
-     fetch('https://car-doctor-server-eight-eta.vercel.app/services')
+     fetch(`https://car-doctor-server-eight-eta.vercel.app/services?sort=${ascending? 'asc' : 'desc'}`)
      .then(res => res.json())
      .then(data => setServiceData(data))
-     }, [])
+     }, [ ascending])
 
 
 
@@ -31,6 +32,8 @@ const Service = () => {
                 <h3 className="text-2xl font-bold text-orange-500"> Service</h3>
                 <h2 className=" text-black font-bold text-5xl">Our Service Area</h2>
                 <p className="text-gray-500">the majority have suffered alteration in some form, by injected humour, or randomized <br /> words which do not look even slightly believable. </p> 
+
+                <button onClick={()=>setAcending(!ascending)} className=" btn btn-primary"> {ascending? " Price: High to Low" :"Price: Low to High"}  </button>
 
              </div>
                 {/* our service area card section  */}
